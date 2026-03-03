@@ -11,7 +11,7 @@ body, html {
 }
 
 /* Style the legend to be positioned on the map. */
-#legend {
+#.info.legend {
   position: absolute;
   bottom: 20px;
   right: 20px;

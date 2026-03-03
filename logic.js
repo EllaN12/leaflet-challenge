@@ -16,7 +16,7 @@ function depthColor(depth) {
   else return "#e9002c";}
 
 function markerSize(mag) {
-    return (mag) * 3;
+    return Math.max(mag * 3, 3);
   }
 
 
@@ -25,17 +25,14 @@ function createFeatures (earthquakeData) {
   let earthquakes = L.geoJSON(earthquakeData, {
     onEachFeature: onEachFeature,
     pointToLayer: function(feature, latlng){
-      let circleMarker = L.circleMarker(latlng, {
+      return L.circleMarker(latlng, {
         fillOpacity: 0.75,
         color: depthColor(feature.geometry.coordinates[2]),
         fillColor: depthColor(feature.geometry.coordinates[2]),
         radius: markerSize(feature.properties.mag),
         
-      }); 
-    circleMarker.bindPopup(`<h3>${feature.properties.place}</h3><hr><h5>${feature.properties.mag}</h5><p>Depth: ${feature.geometry.coordinates[2]}</p>`); 
-    return circleMarker;
-    
-  },
+      });  
+  }
     });
   
     // Send our earthquakes layer to the createMap function/
